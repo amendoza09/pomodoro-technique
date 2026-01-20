@@ -60,7 +60,7 @@ const Clock = ({ selectedTimer, isRunning, muted, resetKey }) => {
   return (
     <div className="items-center gap-4">
       {/* TIMER BODY */}
-      <div className="w-[200px] h-[200px] md:w-[450px] md:h-[450px] rounded-3xl flex items-center bg-gray-700 shadow-md justify-center relative">
+      <div className="w-[250px] h-[250px] md:w-[450px] md:h-[450px] rounded-3xl flex items-center bg-gray-700 shadow-md justify-center relative">
         {/* DIAL */}
         <div className="relative w-[200px] h-[200px] md:w-[400px] md:h-[400px] rounded-2xl bg-gray-200 shadow-sm flex items-center justify-center [--tick-radius:88px]
           md:[--tick-radius:180px]">

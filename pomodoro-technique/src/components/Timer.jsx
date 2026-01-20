@@ -10,7 +10,8 @@ const Timer = ({ timer, muted }) => {
   const [selectedTimer, setSelectedTimer] = useState(DEFAULT_TIMER);
   const [running, setRunning] = useState(false);
   const [resetKey, setResetKey] = useState(0);
-
+  const wakeLockRef = useRef(null);
+  
   const handleSelect = (time, type) => {
     if(running){
       setRunning(false); 
@@ -37,6 +38,41 @@ const Timer = ({ timer, muted }) => {
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, []);
+
+  useEffect(() => {
+    const requestWakeLock = async () => {
+      try {
+        if ("wakeLock" in navigator) {
+          wakeLockRef.current = await navigator.wakeLock.request("screen");
+
+          wakeLockRef.current.addEventListener("release", () => {
+            console.log("Wake lock released");
+          });
+
+          console.log("Wake lock active");
+        }
+      } catch (err) {
+        console.error("Wake lock failed:", err);
+      }
+    };
+
+    const releaseWakeLock = async () => {
+      if (wakeLockRef.current) {
+        await wakeLockRef.current.release();
+        wakeLockRef.current = null;
+      }
+    };
+
+    if (running) {
+      requestWakeLock();
+    } else {
+      releaseWakeLock();
+    }
+
+    return () => {
+      releaseWakeLock();
+    };
+  }, [running]);
 
   return (
     <div className="md:w-1/2 flex flex-col items-center justify-center">

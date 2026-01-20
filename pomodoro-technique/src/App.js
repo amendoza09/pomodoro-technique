@@ -35,7 +35,7 @@ function App() {
     }} className="">
       <div className="md:h-screen">
         <Header />
-        <div className="flex flex-col md:flex-row m-10 h-[78%]">
+        <div className="flex flex-col md:flex-row m-1 md:m-10 h-[78%]">
           <Timer timer={setTimerType} muted={isMuted}/>
           <Tasks />
         </div>
