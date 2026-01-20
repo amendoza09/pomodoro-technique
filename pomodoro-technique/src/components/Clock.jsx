@@ -57,6 +57,18 @@ const Clock = ({ selectedTimer, isRunning, muted, resetKey }) => {
     setTimer(minutes); // you’ll need to lift this state up if it’s passed as prop
   };
 
+  useEffect(() => {
+    if (isRunning) {
+      document.title = `${formattedTime}`;
+    } else {
+      document.title = "The Pomodoro Technique";
+    }
+
+    return () => {
+      document.title = "The Pomodoro Technique";
+    };
+  }, [formattedTime, isRunning]);
+
   return (
     <div className="items-center gap-4">
       {/* TIMER BODY */}
