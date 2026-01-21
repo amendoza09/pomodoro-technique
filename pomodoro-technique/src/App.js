@@ -33,7 +33,7 @@ function App() {
       backgroundColor: timerColor,
       transition: "background-color 0.25s ease-in-out", 
     }} className="">
-      <div className="h-screen w-full">
+      <div className="h-full lg:h-screen w-full">
         <Header />
         <div className="flex flex-col md:flex-row m-1 md:mx-10 h-[78%]">
           <Timer timer={setTimerType} muted={isMuted}/>
