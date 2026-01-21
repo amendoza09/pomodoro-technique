@@ -33,13 +33,13 @@ function App() {
       backgroundColor: timerColor,
       transition: "background-color 0.25s ease-in-out", 
     }} className="">
-      <div className="md:h-screen">
+      <div className="h-screen w-full">
         <Header />
-        <div className="flex flex-col md:flex-row m-1 md:m-10 h-[78%]">
+        <div className="flex flex-col md:flex-row m-1 md:mx-10 h-[78%]">
           <Timer timer={setTimerType} muted={isMuted}/>
           <Tasks />
         </div>
-        <div className="flex pb-5 lg:pb-0 md:w-full justify-end gap-5 px-10">
+        <div className="flex md:w-full mb-10 pb-5 pr-10 justify-end gap-5">
           {isMuted && (
               <button onClick={() => setIsMutes(false)}>
                 <VscMute size={24}/>
