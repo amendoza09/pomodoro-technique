@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import alarmSound from '../assets/mixkit-alert-bells-echo-765.wav';
 
-const Clock = ({ selectedTimer, isRunning, muted, resetKey }) => {
+const Clock = ({ selectedTimer, isRunning, muted, resetKey, timerFinish }) => {
   const [elapsed, setElapsed] = useState(0);
   const [isEditing, setIsEditing] = useState(false);
   const [customInput, setCustomInput] = useState("");
@@ -46,9 +46,9 @@ const Clock = ({ selectedTimer, isRunning, muted, resetKey }) => {
     if (remainingSeconds === 0 && !muted) {
       const alarm = new Audio(alarmSound);
       let count = 0;
-
+      
       const playInterval = setInterval(() => {
-        alarm.currentTime = 0; // reset to start
+        alarm.currentTime = 0;
         alarm.play();
         count++;
         if (count === 3) {
@@ -57,6 +57,11 @@ const Clock = ({ selectedTimer, isRunning, muted, resetKey }) => {
       }, 1800);
     }
   }, [remainingSeconds]);
+  useEffect(() => {
+    if (remainingSeconds === 0) {
+      timerFinish();
+    }
+  })
 
   const handleCustomTimer = (minutes) => {
     setElapsed(0); // reset elapsed

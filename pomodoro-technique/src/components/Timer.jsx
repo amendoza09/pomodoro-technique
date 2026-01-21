@@ -19,8 +19,11 @@ const Timer = ({ timer, muted }) => {
       setSelectedTimer(time);
       timer(type);
     }
-    
   };
+
+  const onFinish = () => {
+    setRunning(false);
+  }
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -119,7 +122,7 @@ const Timer = ({ timer, muted }) => {
         </button>
       </div>
       <div className="justify-center flex flex-col my-10 gap-5 items-center">
-        <Clock selectedTimer={selectedTimer} isRunning={running} muted={muted} resetKey={resetKey}/>
+        <Clock selectedTimer={selectedTimer} isRunning={running} muted={muted} resetKey={resetKey} timerFinish={onFinish}/>
         <div className="flex flex-row gap-10">
           <button disabled={running} onClick={() => setRunning(true)} className={running ? "bg-gray-300 w-[80px] h-10 rounded-lg shadow-sm" : "bg-[#84b867] w-[80px] h-10 rounded-lg shadow-sm"}>
             Start
